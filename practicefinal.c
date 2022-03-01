@@ -11,7 +11,8 @@ int n = 0; // number of elements
 
 
 // create array
-void create() {
+
+void create() 
     int i;
     printf("\n Enter number of elements : ");
     scanf("%d", &n);
@@ -163,6 +164,7 @@ void string_match() {
                 for (k = 0; rep[k] != '\0'; k++, j++) {
                     ans[j] = rep[k];
                 }
+                // line a
                 i = 0; // set i back to 0
                 count = m; // count back to m
             }
@@ -171,6 +173,7 @@ void string_match() {
             ans[j] = str[count]; // increment j and count
             j++;
             count++;
+            // line a 
             m = count; // opp
             i = 0; // set i back to 0
         }
@@ -329,7 +332,7 @@ void palindrome() {
     // main logic -> go till half of the elements in stack
     for (i = 0; i <= top/2; i++) {
         // if one half of stack elements is not equal to other half -> not palindrome (flag = 0)
-        if (stack[i] != stack[top - i]) {
+        if (stack[i] != stack[top - i]) { // example stack[0] != stack[top] or stack[1] != stack[top - 1] and so on...
             flag = 0;
             break;
         }
@@ -433,7 +436,7 @@ int prec(char symbol) {
 
 int main() {
     char post[25], infix[25], symbol, temp;
-    int i, pos = 0;
+    int i, pos = 0; // for now
     printf("\n Enter infix expression : "); 
     scanf("%s", infix);
 
@@ -637,7 +640,7 @@ void insert(int elem)
     else
     {
         if (front == -1)
-            front = 0;           // change front to 0
+            front = 0;           // change front to 0 (front++)
         rear = (rear + 1) % MAX; // make space
         cq[rear] = elem;
         printf("\n Inserted -> %d", elem);
@@ -754,7 +757,7 @@ int count = 0;
 
 // creating node
 node create() {
-    node snode;
+    node snode; // student node
     snode = (node)malloc(sizeof(struct node));
 
     if (snode == NULL) {
@@ -1133,7 +1136,7 @@ void deque() {
                 break;
 
             case 4:
-                deleteAtEnd();
+                head = deleteAtEnd();
                 break;
             case 5:
                 display();
@@ -1218,14 +1221,14 @@ struct node {
     int coeff, exp; 
     struct node *nxt;
 };
-typedef struct node *NODE;
+typedef struct node *node;
 
 // create -> takes head node, coeff, exponent
-NODE create(NODE head, int coeff, int exp) {
-    NODE temp, flag;
+node create(node head, int coeff, int exp) {
+    node temp, flag;
     // if polynomial empty, create and make the node empty.
     if (head == NULL) {
-        temp = (NODE)malloc(sizeof(NODE));
+        temp = (node)malloc(sizeof(node));
         // constructors 
         temp->coeff = coeff;
         temp->exp = exp;
@@ -1235,12 +1238,12 @@ NODE create(NODE head, int coeff, int exp) {
     else {
         // else polynomial not empty, append to last node 
         temp = head;
-        while (temp ->nxt != NULL) {
+        while (temp->nxt != NULL) {
             temp = temp->nxt; // iterate through the node
         }
         // reached last node 
         // define flag, set constructors
-        flag = (NODE)malloc(sizeof(NODE));
+        flag = (node)malloc(sizeof(node));
         flag->coeff = coeff;
         flag->exp = exp;
         flag->nxt = NULL; // points to null as its the last node
@@ -1251,8 +1254,8 @@ NODE create(NODE head, int coeff, int exp) {
 
 // add two polynomials
 
-NODE polynomial_add(NODE p1, NODE p2, NODE sum) {
-    NODE poly1 = p1, poly2 = p2, res; // res = sum
+node polynomial_add(node p1, node p2, node sum) {
+    node poly1 = p1, poly2 = p2, res; // res = sum
     if (poly1 != NULL && poly2 == NULL) {
         // poly1 is answer
         sum = poly1;
@@ -1268,12 +1271,12 @@ NODE polynomial_add(NODE p1, NODE p2, NODE sum) {
     while (poly1 != NULL && poly2 != NULL) {
         // if sum = null, create sum node and assign res to sum
         if (sum == NULL) {
-            sum = (NODE)malloc(sizeof(NODE));
+            sum = (node)malloc(sizeof(node));
             res = sum;
         }
         // else sum is already present, just create a new one and append it to res.next
         else {
-            res->nxt = (NODE)malloc(sizeof(NODE));
+            res->nxt = (node)malloc(sizeof(node));
             res = res->nxt;
         }
 
@@ -1305,7 +1308,7 @@ NODE polynomial_add(NODE p1, NODE p2, NODE sum) {
 
     // poly1 is not empty
     while (poly1 != NULL) {
-        res->nxt = (NODE)malloc(sizeof(NODE)); // create result's next node
+        res->nxt = (node)malloc(sizeof(node)); // create result's next node
         res = res->nxt; // shift
         // same thing
         res->coeff = poly1->coeff;
@@ -1314,7 +1317,7 @@ NODE polynomial_add(NODE p1, NODE p2, NODE sum) {
     }
     // poly2 is not empty
     while (poly2 != NULL) {
-        res->nxt = (NODE)malloc(sizeof(NODE)); // create result's next node
+        res->nxt = (node)malloc(sizeof(node)); // create result's next node
         res = res->nxt; // shift
         // same thing
         res->coeff = poly2->coeff;
@@ -1330,8 +1333,8 @@ NODE polynomial_add(NODE p1, NODE p2, NODE sum) {
 
 // display polynomial
 
-void display(NODE head) {
-    NODE temp = head;
+void display(node head) {
+    node temp = head;
     while (temp != NULL) {
         // print and then iterate
         printf("%dx^%d", temp->coeff, temp->exp);
@@ -1347,7 +1350,7 @@ void display(NODE head) {
 }
 
 int main() {
-    NODE p1 = NULL, p2 = NULL, sum = NULL; // initially
+    node p1 = NULL, p2 = NULL, sum = NULL; // initially
     int choice, coeff, exp;
     while (1) {
         printf("\n 1. Enter polynomial 1");
@@ -1556,7 +1559,7 @@ int main() {
             break;
 
         case 3:
-            if( root == NULL) {
+            if (root == NULL) {
                 printf("\n Tree is not created"); // empty
             }
             else {
